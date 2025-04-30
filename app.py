@@ -1,7 +1,9 @@
 import os
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -9,12 +11,10 @@ def index():
 
 @app.route('/count', methods=['POST'])
 def count_words():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     text = data.get('text', '')
-    
     # Count the words
     word_count = len(text.split()) if text.strip() else 0
-    
     return jsonify({'count': word_count})
 
 if __name__ == '__main__':
