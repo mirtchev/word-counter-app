@@ -13,7 +13,7 @@ def count_words():
     text = data.get('text', '')
     
     # Count the words
-    word_count = len( 1 + text.split()) if text.strip() else 0
+    word_count = len(text.split()) if text.strip() else 0
     
     return jsonify({'count': word_count})
 
